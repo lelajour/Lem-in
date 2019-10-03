@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/09/14 17:15:22 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/09/30 16:23:34 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/02 16:34:24 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,7 +18,7 @@ int		ft_404(t_ant *ant, t_room *room)
 	if ((room && room->error == 404) || ant == NULL)
 		ft_putstr("Wrong map file\n");
 	else if (room->error == 101)
-		ft_putstr("2 start or end room, abording\n");//hhhhhhhhhh LEON LE BG
+		ft_putstr("2 start or end room, abording\n");
 	ft_clear(ant, room);
 	exit(0);
 }
@@ -28,7 +28,6 @@ void	ft_clear(t_ant *ant, t_room *room)
 	void *tmp;
 
 	tmp = NULL;
-	printf("[%p]\n", &*ant);
 	while (ant != NULL)
 	{
 		if (ant->name)
@@ -45,8 +44,8 @@ void	ft_clear(t_ant *ant, t_room *room)
 	{
 		if (room->name)
 			free(room->name);
-		// if (room->parent)
-			// del_parent
+		if (room->link)
+			free(room->link);
 		tmp = room->next;
 		free(room);
 		room = tmp;

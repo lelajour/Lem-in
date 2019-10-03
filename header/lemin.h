@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/09/13 12:57:17 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/09/30 16:22:33 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/03 16:32:13 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,11 +16,15 @@
 
 # include "ft_printf.h"
 # include "limits.h"
+# include "math.h"
 # include "get_next_line.h"
+
+#define DANUB 99999
 
 typedef struct					s_room
 {
 	int							nb;
+	int							nb_link;
 	char						*name;
 	int							pos;
 	int							len;
@@ -52,5 +56,7 @@ int							room_check_if_double(char *line, t_room *room);
 t_ant						*find_nb_ant();
 t_room					*room_check(t_room *tmp, char *line);
 void						set_graph(char *line, t_room *room);
+t_room					**set_room_link(char **tab, int i, int *itab, t_room *room);
+char						**realloc_tab(char **tab, int i);
 
 #endif

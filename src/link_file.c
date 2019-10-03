@@ -6,21 +6,35 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/09/30 16:13:58 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/01 17:18:40 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/03 17:27:11 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../header/lemin.h"
 
-// static void fill_itab(int *ret, int *itab, int nb)
-// {
-// 	(void)nb;
-// 	(void)itab;
-// 	(void)ret;
-// 	ft_printf("[%d]|[%d]", ret[0], ret[1]);
-//
-// }
+static void create_graph(char **tab, int *itab, t_room *room, int nb_link)
+{
+	t_room	*tmp;
+	int			i;
+	int			y;
+
+	tmp = room;
+	i = 0;
+	y = 0;
+	room->nb_link = nb_link;
+	while (tmp->next != NULL)
+	{
+		tmp->link = set_room_link(tab, i, itab, room);
+		// while (y < itab[i])
+		// 	ft_printf("""""[%p]""""\n", tmp->link[y++]);
+		// ft_printf("---------");
+		tmp = tmp->next;
+		i++;
+	}
+	ft_memdel((void**)&itab);
+	// ft_clear_tab(tab, room->nb);
+}
 
 static int *del_ret(char *one, char *two, int *ret)
 {
@@ -71,26 +85,29 @@ static int	*look_for_links(char *line, t_room *tmp)
 void	set_graph(char *line, t_room *room)
 {
 	t_room				*tmp;
-	int					*ret;
-	static	int		*itab = NULL;
-	static	char	**tab = NULL;
+	int						*ret;
 	static	int		i = 0;
+	static	int		*itab = NULL;
+	static	char	*tab[999];
 
 	tmp = room;
 	ret = NULL;
 	if (!itab)
 		itab = ft_memalloc(room->nb);
-	if (!tab)
-		if (!(tab = malloc(sizeof(char*) * room->nb)))
-			exit(-1);
-	// if (line == NULL)
-	// 	create_graph(tab, itab, room);
-	if ((ret = look_for_links(line, tmp)) != 0 && i < room->nb)
+	if (line == NULL)
+		create_graph(tab, itab, room, i);
+	else if ((ret = look_for_links(line, tmp)) != 0)
 	{
 		tab[i] = ft_strdup(line);
 		itab[ret[0]] += 1;
 		itab[ret[1]] += 1;
 		i++;
+		// realloc_tab(tab, i);
 		ft_memdel((void**)&ret);
 	}
+	// int y = 0;
+	// ft_printf("%s\n", line);
+	// while (y < room->nb)
+	// 	ft_printf("[%d] ", itab[y++]);
+	// ft_printf("\n");
 }

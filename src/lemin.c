@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/09/13 12:56:35 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/01 17:16:57 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/02 16:22:33 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -132,7 +132,7 @@ int		main(void)
 		if (tmp->error != 0)
 			return (ft_404(ant, room));
 	}
-	// set_graph(NULL, room);
+	set_graph(NULL, room);
 	ft_printf("nombre de room = %d\n", room->nb);
 	ft_404(ant, room);
 	return (0);

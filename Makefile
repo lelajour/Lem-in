@@ -6,7 +6,7 @@
 #    By: lelajour <lelajour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/10 20:37:24 by lelajour          #+#    #+#              #
-#    Updated: 2019/09/30 16:22:19 by lelajour         ###   ########.fr        #
+#    Updated: 2019/10/02 18:03:06 by lelajour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ D_LIBFT = libft/
 
 D_LIBFTPRINTF = libft/libftprintf/
 
-SRC1 =		lemin.c ant_file.c clear_file.c room_file.c link_file.c\
+SRC1 =		lemin.c ant_file.c clear_file.c room_file.c link_file.c graph.c\
 
 SRC2 =		libft.a\
 
