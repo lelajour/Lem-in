@@ -55,7 +55,7 @@ int							get_room_width(char *line);
 int							room_check_if_double(char *line, t_room *room);
 t_ant						*find_nb_ant();
 t_room					*room_check(t_room *tmp, char *line);
-void						set_graph(char *line, t_room *room);
+int						**set_graph(char *line, t_room *room);
 t_room					**set_room_link(char **tab, int i, int *itab, t_room *room);
 char						**realloc_tab(char **tab, int i);
 

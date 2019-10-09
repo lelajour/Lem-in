@@ -93,6 +93,8 @@ static t_room	*lemin_parsing(char *line, t_room *tmp, t_room *room)
 		tmp->len = ft_atoi(line + len);
 		tmp->width = get_room_width(line);
 		tmp->next = room_struct_allocation();
+		if (tmp->len < 0 || tmp->width < 0)
+			room->error = 404;
 		tmp = tmp->next;
 	}
 	else if (check_if_tube(line, room) == 0)
@@ -105,7 +107,7 @@ void		vhevklist(t_room *room)
 {
 	int i;
 
-	i = 1;
+	i = 0;
 	while (room->next != NULL)
 	{
 		ft_printf("%d|[%p][%s]\n", i++, &*room, room->name);
@@ -129,7 +131,7 @@ int		main(void)
 	{
 		vhevklist(room);
 		tmp = lemin_parsing(line, tmp, room);
-		if (tmp->error != 0)
+		if (tmp->error != 0 || room->error != 0)
 			return (ft_404(ant, room));
 	}
 	set_graph(NULL, room);
