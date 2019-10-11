@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/09/13 12:56:35 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/02 16:22:33 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/11 09:40:00 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -93,6 +93,8 @@ static t_room	*lemin_parsing(char *line, t_room *tmp, t_room *room)
 		tmp->len = ft_atoi(line + len);
 		tmp->width = get_room_width(line);
 		tmp->next = room_struct_allocation();
+		if (tmp->len < 0 || tmp->width < 0)
+			room->error = 404;
 		tmp = tmp->next;
 	}
 	else if (check_if_tube(line, room) == 0)
@@ -105,7 +107,7 @@ void		vhevklist(t_room *room)
 {
 	int i;
 
-	i = 1;
+	i = 0;
 	while (room->next != NULL)
 	{
 		ft_printf("%d|[%p][%s]\n", i++, &*room, room->name);
@@ -116,10 +118,11 @@ void		vhevklist(t_room *room)
 
 int		main(void)
 {
-	char	*line;
-	t_ant	*ant;
-	t_room *room;
-	t_room *tmp;
+	char		*line;
+	t_ant		*ant;
+	t_room	*room;
+	t_room	*tmp;
+	t_path	*path;
 
 	line = NULL;
 	ant = find_nb_ant();
@@ -129,10 +132,12 @@ int		main(void)
 	{
 		vhevklist(room);
 		tmp = lemin_parsing(line, tmp, room);
-		if (tmp->error != 0)
+		if (tmp->error != 0 || room->error != 0)
 			return (ft_404(ant, room));
 	}
-	set_graph(NULL, room);
+	if (room->link = (set_graph(NULL, room) &&
+	(path = check_if_connected(room, 0))))
+
 	ft_printf("nombre de room = %d\n", room->nb);
 	ft_404(ant, room);
 	return (0);
