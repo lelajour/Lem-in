@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/09/13 12:57:17 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/11 09:37:51 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/12 10:26:14 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -48,9 +48,12 @@ typedef struct					s_ant
 
 typedef struct					s_path
 {
-	int		nb_link;
-	int		*link;
-	struct	s_path *next;
+	int		nb_path;
+	int		**path;
+	int		len_did;
+	int		*did;
+	int		len_td;
+	int		**to_do;
 }								t_path;
 
 t_ant						*ant_struct_allocation(t_ant *ant, int nb_ant);
@@ -62,8 +65,10 @@ int							get_room_width(char *line);
 int							room_check_if_double(char *line, t_room *room);
 t_ant						*find_nb_ant();
 t_room					*room_check(t_room *tmp, char *line);
-int						**set_graph(char *line, t_room *room);
+int							**set_graph(char *line, t_room *room);
 t_room					**set_room_link(char **tab, int i, int *itab, t_room *room);
 char						**realloc_tab(char **tab, int i);
+t_path					*init_path(int **link, t_room *room);
+t_path					*heck_if_connected(t_room *room);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/09/13 12:56:35 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/11 09:40:00 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/12 07:10:50 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -83,7 +83,6 @@ int		get_room_width(char *line)
 static t_room	*lemin_parsing(char *line, t_room *tmp, t_room *room)
 {
 	int len;
-
 	len = ft_strclen(line, ' ');
 	if (line[0] == '#')
 		tmp = room_check(tmp, line);
@@ -122,7 +121,7 @@ int		main(void)
 	t_ant		*ant;
 	t_room	*room;
 	t_room	*tmp;
-	t_path	*path;
+	//t_path	*path;
 
 	line = NULL;
 	ant = find_nb_ant();
@@ -130,15 +129,14 @@ int		main(void)
 	tmp = room;
 	while (get_next_line(0, &line) == 1)
 	{
-		vhevklist(room);
+		// vhevklist(room);
 		tmp = lemin_parsing(line, tmp, room);
 		if (tmp->error != 0 || room->error != 0)
 			return (ft_404(ant, room));
 	}
-	if (room->link = (set_graph(NULL, room) &&
-	(path = check_if_connected(room, 0))))
-
-	ft_printf("nombre de room = %d\n", room->nb);
+	room->link = set_graph(NULL, room);
+	//path = check_if_connected(room);
+	ft_printf("\nnombre de room = %d\n", room->nb);
 	ft_404(ant, room);
 	return (0);
 }
