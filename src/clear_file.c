@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/09/14 17:15:22 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/12 16:22:30 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/25 21:31:09 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -70,6 +70,20 @@ static int		ft_start_chr(int *link, int nb)
 	return (tmp);
 }
 
+int	look_for_end(t_room *room)
+{
+	int i;
+
+	i = 0;
+	while (i < room->nb)
+	{
+		if (ft_memchr((room->link[i]), 3, room->nb) != NULL)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
 static int		**to_do_init(int *link, t_room *room, t_path *path)
 {
 	int	j;
@@ -85,13 +99,13 @@ static int		**to_do_init(int *link, t_room *room, t_path *path)
 	while (j < room->nb)
 	{
 		while (ret < path->nb_path)
-			to_do[ret] = ft_imemset(ft_memalloc(room->nb), -2, room->nb);
+			to_do[ret++] = ft_imemset(ft_memalloc(room->nb), -2, room->nb);
 		if (link[j] == 1)
-				to_do[tmp][0] = j;
-				tmp++;
+			to_do[tmp++][0] = j;
 		j++;
 	}
-	path->len_td = tmp;
+	path->len_td = 0;
+	path->end = look_for_end(room);
 	return (to_do);
 }
 
@@ -109,18 +123,19 @@ t_path	*init_path(int **link, t_room *room)
 	{
 		if ((nb_path = ft_start_chr(link[i], room->nb)) != -1)
 		{
-			ft_printf("nb_path = %d\n", nb_path);
+			// ft_printf("nb_path = %d\n", nb_path);
 			path->nb_path = nb_path;
 			if (!(path->path = malloc(sizeof(t_path) * nb_path)))
 				return (NULL);
 			while (nb_path-- > 0)
-				path->path[nb_path] = ft_memalloc(room->nb);
-			path->did = ft_memalloc(room->nb);
+				path->path[nb_path] = ft_imemset(ft_memalloc(room->nb), -2, room->nb);
+			path->did = ft_imemset(ft_memalloc(room->nb), -1, room->nb);
 			path->did[0] = i;
+			path->start = i;
 			path->to_do = to_do_init(link[i], room, path);
-			return (path);
+			break ;
 		}
 		i++;
 	}
-	return (NULL);
+	return (path);
 }

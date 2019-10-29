@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/09/13 12:57:17 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/12 10:26:14 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/24 20:00:45 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -48,7 +48,10 @@ typedef struct					s_ant
 
 typedef struct					s_path
 {
+	int		start;
+	int		end;
 	int		nb_path;
+	int		len_path;
 	int		**path;
 	int		len_did;
 	int		*did;
@@ -69,6 +72,9 @@ int							**set_graph(char *line, t_room *room);
 t_room					**set_room_link(char **tab, int i, int *itab, t_room *room);
 char						**realloc_tab(char **tab, int i);
 t_path					*init_path(int **link, t_room *room);
-t_path					*heck_if_connected(t_room *room);
+t_path					*check_if_connected(t_room *room);
+int							get_to_do(t_path *path, t_room *room, int pos, int i);
+void							bfs_algo(t_path *path, t_room *room, int pos, int node);
+void						save_path(t_path *path, int pos, int i);
 
 #endif

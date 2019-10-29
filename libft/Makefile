@@ -6,7 +6,7 @@
 #    By: lelajour <lelajour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/25 16:35:57 by lelajour          #+#    #+#              #
-#    Updated: 2019/09/16 21:19:01 by lelajour         ###   ########.fr        #
+#    Updated: 2019/10/23 16:31:30 by lelajour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRCS= ft_atoi.c ft_memcpy.c ft_strrev.c ft_strlcat.c ft_lstnew.c ft_lstdelone.c\
 	ft_lstadd.c ft_strrchr.c ft_lstiter.c ft_lstmap.c ft_fail.c ft_strndup.c\
 	ft_strlentab.c ft_swap.c ft_colchr.c ft_swap_line.c ft_swap_col.c\
 	get_next_line.c ft_strclen.c ft_strrclen.c ft_clear_tab.c ft_clear_int_tab.c\
-	ft_strnclen.c ft_strrnclen.c ft_ibzero.c ft_imemset.c\
+	ft_strnclen.c ft_strrnclen.c ft_ibzero.c ft_imemset.c ft_itabcpy.c\
 
 D_LIBFTPRINTF = libftprintf/
 

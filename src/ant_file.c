@@ -60,7 +60,7 @@ t_ant *ant_struct_allocation(t_ant *ant, int nb_ant)
 	len = 0;
 	line = NULL;
 	tmp = ant;
-	printf("%d fourmis\n\n", nb_ant);
+	printf("%d\n", nb_ant);
 	while (++len <= nb_ant && (nb_ant > 0 && nb_ant < INT_MAX))
 	{
 		line = ft_itoa(len);
