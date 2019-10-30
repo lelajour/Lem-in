@@ -52,11 +52,9 @@ typedef struct					s_path
 	int		end;
 	int		nb_path;
 	int		len_path;
-	int		**path;
-	int		len_did;
+	int		*path;
 	int		*did;
-	int		len_td;
-	int		**to_do;
+	int		*to_do;
 }								t_path;
 
 t_ant						*ant_struct_allocation(t_ant *ant, int nb_ant);

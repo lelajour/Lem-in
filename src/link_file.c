@@ -87,21 +87,21 @@ int		**set_graph(char *line, t_room *room)
 	{
 		if (link == NULL)
 			room->error = 404;
-		else
-		{
-			int i = 0;
-			int ret = 0;
-			// ft_printf("    0   1   2   3   4   5\n");
-			while (i < room->nb)
-			{
-				ret = 0;
-				ft_printf("%d| ", i);
-				while (ret < room->nb)
-					ft_printf("[%02d]", link[i][ret++]);
-				i++;
-				ft_printf("\n");
-			}
-		}
+		// else
+		// {
+		// 	int i = 0;
+		// 	int ret = 0;
+		// 	// ft_printf("    0   1   2   3   4   5\n");
+		// 	while (i < room->nb)
+		// 	{
+		// 		ret = 0;
+		// 		ft_printf("%d| ", i);
+		// 		while (ret < room->nb)
+		// 			ft_printf("[%02d]", link[i][ret++]);
+		// 		i++;
+		// 		ft_printf("\n");
+		// 	}
+		// }
 		return (link);
 	}
 	else if (link == NULL)

@@ -136,6 +136,8 @@ int		main(void)
 			return (ft_404(ant, room));
 	}
 	room->link = set_graph(NULL, room);
+	if (room->error != 0)
+		return (ft_404(ant, room));
 	path = check_if_connected(room);
 	ft_printf("nombre de room = %d\n", room->nb);
 	ft_404(ant, room);

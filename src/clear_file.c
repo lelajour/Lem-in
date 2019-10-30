@@ -19,6 +19,7 @@ int		ft_404(t_ant *ant, t_room *room)
 		ft_putstr("Wrong map file\n");
 	else if (room->error == 101)
 		ft_putstr("2 start or end room, abording\n");
+	// ft_clear_path(room->soluce);
 	ft_clear(ant, room);
 	exit(0);
 }
@@ -45,7 +46,7 @@ void	ft_clear(t_ant *ant, t_room *room)
 		if (room->name)
 			free(room->name);
 		if (room->link)
-			free(room->link);
+			ft_clear_int_tab(room->link, room->nb);
 		tmp = room->next;
 		free(room);
 		room = tmp;
@@ -84,27 +85,22 @@ int	look_for_end(t_room *room)
 	return (-1);
 }
 
-static int		**to_do_init(int *link, t_room *room, t_path *path)
+static int		*to_do_init(int *link, t_room *room, t_path *path)
 {
 	int	j;
-	int	ret;
 	int	tmp;
-	int	**to_do;
+	int	*to_do;
 
 	j = 0;
-	ret = 0;
 	tmp = 0;
-	if (!(to_do = malloc(sizeof(int*) * path->nb_path)))
+	if (!(to_do = malloc(sizeof(int) * path->nb_path)))
 		return (NULL);
 	while (j < room->nb)
 	{
-		while (ret < path->nb_path)
-			to_do[ret++] = ft_imemset(ft_memalloc(room->nb), -2, room->nb);
 		if (link[j] == 1)
-			to_do[tmp++][0] = j;
+			to_do[tmp++] = j;
 		j++;
 	}
-	path->len_td = 0;
 	path->end = look_for_end(room);
 	return (to_do);
 }
@@ -119,16 +115,14 @@ t_path	*init_path(int **link, t_room *room)
 	if (!(path = malloc(sizeof(t_path))))
 		return (NULL);
 	nb_path = 0;
+	path->nb_path = 0;
 	while (i < room->nb)
 	{
 		if ((nb_path = ft_start_chr(link[i], room->nb)) != -1)
 		{
 			// ft_printf("nb_path = %d\n", nb_path);
 			path->nb_path = nb_path;
-			if (!(path->path = malloc(sizeof(t_path) * nb_path)))
-				return (NULL);
-			while (nb_path-- > 0)
-				path->path[nb_path] = ft_imemset(ft_memalloc(room->nb), -2, room->nb);
+			path->path = ft_imemset(ft_memalloc(room->nb), -2, room->nb);
 			path->did = ft_imemset(ft_memalloc(room->nb), -1, room->nb);
 			path->did[0] = i;
 			path->start = i;

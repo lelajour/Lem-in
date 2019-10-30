@@ -66,14 +66,14 @@ void	bfs_algo(t_path *path, t_room *room, int pos, int node)
 	int		i;
 	int		nb;
 
-	i = -1;
+	i = 0;
 	path->did[node] = 1;
-	path->path[pos][path->len_path++] = node;
+	path->path[path->len_path++] = node;
 	if (node == path->end)
 	{
 		int y = -1;
 		while (++y < path->len_path)
-			ft_printf("[%d]|", path->path[pos][y]);
+			ft_printf("[%d]|", path->path[y]);
 		ft_printf("\n");
 	}
 	else
@@ -92,19 +92,23 @@ void	bfs_algo(t_path *path, t_room *room, int pos, int node)
 t_path	*check_if_connected(t_room *room)
 {
 	int		pos;
-	int		checkd;
 	t_path	*path;
 
-	checkd = 0;
 	pos = 0;
 	if ((path = init_path(room->link, room)) == NULL)
 		return (NULL);
-	path->len_did = 1;
-	while (pos < 1)
+	int y = -1;
+	ft_printf("La salle de départ est %d et la salle de fin est %d\n", path->start, path->end);
+	ft_printf("Nous sommes les salles connecté a la salle start :\n");
+	while (++y < path->nb_path)
+		ft_printf("[%d]|", path->to_do[y]);
+	ft_printf("\n-------------\n");
+	while (pos < path->nb_path)
 	{
 		path->did[path->start] = 1;
 		path->len_path = 0;
-		bfs_algo(path, room, pos, 1);
+		bfs_algo(path, room, pos, path->to_do[pos]);
+		ft_printf("\n\n");
 		pos++;
 	}
 	return (path);
