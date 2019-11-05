@@ -24,7 +24,8 @@ D_LIBFT = libft/
 
 D_LIBFTPRINTF = libft/libftprintf/
 
-SRC1 =		lemin.c ant_file.c clear_file.c room_file.c link_file.c graph.c\
+SRC1 =		lemin.c ant_file.c clear_file.c room_file.c link_file.c bfs.c\
+			path_slc_init.c utils.c\
 
 SRC2 =		libft.a\
 

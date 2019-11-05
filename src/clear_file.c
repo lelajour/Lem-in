@@ -13,14 +13,45 @@
 
 #include "../header/lemin.h"
 
-int		ft_404(t_ant *ant, t_room *room)
+static void		ft_clear_path(t_path *path)
+{
+	t_slc *tmp;
+
+	tmp = NULL;
+	if (path->path != NULL)
+		free(path->path);
+	if (path->did != NULL)
+		free(path->did);
+	if (path->to_do != NULL)
+		free(path->to_do);
+	if (path->slc != NULL)
+	{
+		while (path->slc != NULL)
+		{
+			if (path->slc->path != NULL)
+				ft_clear_int_tab(path->slc->path, path->slc->nb_slc);
+			if (path->slc->len_path != NULL)
+				free(path->slc->len_path);
+			tmp = path->slc;
+			path->slc = path->slc->next;
+			free(tmp);
+		}
+	}
+	free(path);
+}
+
+int		ft_404(t_ant *ant, t_room *room, t_path *path)
 {
 	if ((room && room->error == 404) || ant == NULL)
 		ft_putstr("Wrong map file\n");
 	else if (room->error == 101)
 		ft_putstr("2 start or end room, abording\n");
+	else if (path && path->valid_path == 0)
+		ft_putstr("No valid path, abording\n");
 	// ft_clear_path(room->soluce);
 	ft_clear(ant, room);
+	if (path != NULL)
+		ft_clear_path(path);
 	exit(0);
 }
 
@@ -51,85 +82,4 @@ void	ft_clear(t_ant *ant, t_room *room)
 		free(room);
 		room = tmp;
 	}
-}
-
-static int		ft_start_chr(int *link, int nb)
-{
-	int	j;
-	int	tmp;
-
-	j = 0;
-	tmp = 0;
-	while (j < nb)
-	{
-		if (link[j] == 1)
-			tmp++;
-		else if (link[j] == 2 || link[j] == 3)
-			return (-1);
-		j++;
-	}
-	return (tmp);
-}
-
-int	look_for_end(t_room *room)
-{
-	int i;
-
-	i = 0;
-	while (i < room->nb)
-	{
-		if (ft_memchr((room->link[i]), 3, room->nb) != NULL)
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
-static int		*to_do_init(int *link, t_room *room, t_path *path)
-{
-	int	j;
-	int	tmp;
-	int	*to_do;
-
-	j = 0;
-	tmp = 0;
-	if (!(to_do = malloc(sizeof(int) * path->nb_path)))
-		return (NULL);
-	while (j < room->nb)
-	{
-		if (link[j] == 1)
-			to_do[tmp++] = j;
-		j++;
-	}
-	path->end = look_for_end(room);
-	return (to_do);
-}
-
-t_path	*init_path(int **link, t_room *room)
-{
-	int		i;
-	int		nb_path;
-	t_path	*path;
-
-	i = 0;
-	if (!(path = malloc(sizeof(t_path))))
-		return (NULL);
-	nb_path = 0;
-	path->nb_path = 0;
-	while (i < room->nb)
-	{
-		if ((nb_path = ft_start_chr(link[i], room->nb)) != -1)
-		{
-			// ft_printf("nb_path = %d\n", nb_path);
-			path->nb_path = nb_path;
-			path->path = ft_imemset(ft_memalloc(room->nb), -2, room->nb);
-			path->did = ft_imemset(ft_memalloc(room->nb), -1, room->nb);
-			path->did[0] = i;
-			path->start = i;
-			path->to_do = to_do_init(link[i], room, path);
-			break ;
-		}
-		i++;
-	}
-	return (path);
 }

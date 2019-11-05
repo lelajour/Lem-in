@@ -46,6 +46,16 @@ typedef struct					s_ant
 	struct s_ant		*next;
 }								t_ant;
 
+typedef struct					s_soluce
+{
+	int		**path;
+	int		*len_path;
+	int		nb_slc;
+	int		min;
+	int		mallocsize;
+	struct s_soluce	*next;
+}								t_slc;
+
 typedef struct					s_path
 {
 	int		start;
@@ -55,13 +65,16 @@ typedef struct					s_path
 	int		*path;
 	int		*did;
 	int		*to_do;
+	int		valid_path;
+	struct s_soluce	*slc;
+
 }								t_path;
 
 t_ant						*ant_struct_allocation(t_ant *ant, int nb_ant);
 void						ft_clear(t_ant *ant, t_room *room);
 void						room_assignation(char *line);
 t_room					*room_struct_allocation();
-int							ft_404(t_ant *ant, t_room *room);
+int							ft_404(t_ant *ant, t_room *room, t_path *path);
 int							get_room_width(char *line);
 int							room_check_if_double(char *line, t_room *room);
 t_ant						*find_nb_ant();
@@ -73,6 +86,9 @@ t_path					*init_path(int **link, t_room *room);
 t_path					*check_if_connected(t_room *room);
 int							get_to_do(t_path *path, t_room *room, int pos, int i);
 void							bfs_algo(t_path *path, t_room *room, int pos, int node);
-void						save_path(t_path *path, int pos, int i);
+void						save_path(t_path *path, int pos);
+int							look_for_end(t_room *room);
+int							ft_start_chr(int *link, int nb);
+t_slc						*init_slc(int nb_path);
 
 #endif

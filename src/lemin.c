@@ -99,21 +99,8 @@ static t_room	*lemin_parsing(char *line, t_room *tmp, t_room *room)
 	}
 	else if (check_if_tube(line, room) == 0)
 		set_graph(line, room);
-	free(line);
+	ft_strdel(&line);
 	return (tmp);
-}
-
-void		vhevklist(t_room *room)
-{
-	int i;
-
-	i = 0;
-	while (room->next != NULL)
-	{
-		ft_printf("%d|[%p][%s]\n", i++, &*room, room->name);
-		room = room->next;
-	}
-	ft_printf("-------------------\n");
 }
 
 int		main(void)
@@ -130,16 +117,17 @@ int		main(void)
 	tmp = room;
 	while (get_next_line(0, &line) == 1)
 	{
-		// vhevklist(room);
 		tmp = lemin_parsing(line, tmp, room);
 		if (tmp->error != 0 || room->error != 0)
-			return (ft_404(ant, room));
+			return (ft_404(ant, room, NULL));
 	}
 	room->link = set_graph(NULL, room);
 	if (room->error != 0)
-		return (ft_404(ant, room));
+		return (ft_404(ant, room, NULL));
 	path = check_if_connected(room);
 	ft_printf("nombre de room = %d\n", room->nb);
-	ft_404(ant, room);
+	if (path->valid_path == 0)
+		ft_404(ant, room, path);
+	ft_404(ant, room, path);
 	return (0);
 }
