@@ -128,6 +128,9 @@ int		main(void)
 	ft_printf("nombre de room = %d\n", room->nb);
 	if (path->valid_path == 0)
 		ft_404(ant, room, path);
+		/*
+	path->slc->path(0) =
+	path->slc = path->slc->next;*/
 	ft_404(ant, room, path);
 	return (0);
 }

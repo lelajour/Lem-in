@@ -22,9 +22,9 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	temp_s = (const int*)s;
 	while (--n)
 	{
-		if (*(const int*)s == (int)c)
-			return ((void*)s);
-		s++;
+		if (*(const int*)temp_s == (int)c)
+			return ((void*)temp_s);
+		temp_s++;
 	}
 	return (NULL);
 }
