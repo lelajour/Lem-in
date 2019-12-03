@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/13 17:50:33 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/03 12:31:38 by lelajour    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/08 18:48:56 by lelajour    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,11 +20,12 @@ void	*ft_memchr(const void *s, int c, size_t n)
 
 	a = 0;
 	temp_s = (const int*)s;
-	while (--n)
+	while (n != 0)
 	{
 		if (*(const int*)temp_s == (int)c)
 			return ((void*)temp_s);
 		temp_s++;
+		n--;
 	}
 	return (NULL);
 }

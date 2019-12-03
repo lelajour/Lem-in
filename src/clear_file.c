@@ -1,17 +1,30 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   clear_file.c                                     .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/09/14 17:15:22 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/25 21:31:09 by lelajour    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   clear_file.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lelajour <lelajour@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/14 17:15:22 by lelajour          #+#    #+#             */
+/*   Updated: 2019/11/25 03:58:03 by lelajour         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../header/lemin.h"
+
+static void		clear_zend(t_end *zend, int nb_path)
+{
+	if (zend->max_len != NULL)
+		free(zend->max_len);
+	if (zend->heat != NULL)
+		free(zend->heat);
+	if (zend->ant != NULL)
+		free(zend->ant);
+	if (zend->path != NULL)
+		ft_clear_int_tab(zend->path, nb_path);
+	free(zend);
+}
 
 static void		ft_clear_path(t_path *path)
 {
@@ -24,6 +37,8 @@ static void		ft_clear_path(t_path *path)
 		free(path->did);
 	if (path->to_do != NULL)
 		free(path->to_do);
+	if (path->zend != NULL)
+		clear_zend(path->zend, path->nb_path);
 	if (path->slc != NULL)
 	{
 		while (path->slc != NULL)
@@ -48,7 +63,6 @@ int		ft_404(t_ant *ant, t_room *room, t_path *path)
 		ft_putstr("2 start or end room, abording\n");
 	else if (path && path->valid_path == 0)
 		ft_putstr("No valid path, abording\n");
-	// ft_clear_path(room->soluce);
 	ft_clear(ant, room);
 	if (path != NULL)
 		ft_clear_path(path);

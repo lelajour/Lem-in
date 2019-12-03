@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   libft.h                                          .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/06/04 20:40:03 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/23 16:31:12 by lelajour    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lelajour <lelajour@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/04 20:40:03 by lelajour          #+#    #+#             */
+/*   Updated: 2019/11/25 07:33:36 by lelajour         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef LIBFT_H
 # define LIBFT_H
@@ -121,5 +121,6 @@ void				ft_ibzero(void *s, size_t n);
 void				*ft_imemset(void *s, int c, size_t n);
 char				*ft_strcdup(char *str, int c);
 int					*ft_itabdup(int *tab, int len);
+void				*ft_imemcpy(void *dest, void *src, size_t n);
 
 #endif

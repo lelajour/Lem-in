@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   lemin.c                                          .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/09/13 12:56:35 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/18 17:59:28 by lelajour    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lemin.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lelajour <lelajour@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/13 12:56:35 by lelajour          #+#    #+#             */
+/*   Updated: 2019/11/25 01:59:36 by lelajour         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../header/lemin.h"
 
@@ -86,7 +86,7 @@ static t_room	*lemin_parsing(char *line, t_room *tmp, t_room *room)
 
 	len = ft_strclen(line, ' ');
 	if (line[0] == '#')
-		tmp = room_check(tmp, line);
+		tmp = room_check(tmp, line, &room->error);
 	else if (!ft_strchr(line, '-') && check_if_room(line, tmp, room) == 0)
 	{
 		tmp->name = ft_strsub(line, 0, len);
@@ -124,13 +124,10 @@ int		main(void)
 	room->link = set_graph(NULL, room);
 	if (room->error != 0)
 		return (ft_404(ant, room, NULL));
-	path = check_if_connected(room);
+	path = check_if_connected(room, ant);
 	ft_printf("nombre de room = %d\n", room->nb);
 	if (path->valid_path == 0)
 		ft_404(ant, room, path);
-		/*
-	path->slc->path(0) =
-	path->slc = path->slc->next;*/
 	ft_404(ant, room, path);
 	return (0);
 }

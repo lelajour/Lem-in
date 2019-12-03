@@ -1,17 +1,19 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   link_file.c                                      .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/09/30 16:13:58 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/23 17:55:42 by lelajour    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   link_file.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lelajour <lelajour@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/30 16:13:58 by lelajour          #+#    #+#             */
+/*   Updated: 2019/11/24 22:59:05 by lelajour         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../header/lemin.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 static int **link_init(int nb)
 {
@@ -40,6 +42,7 @@ static int	*get_room2(char *line, t_room *room)
 	room2 = ft_memalloc(2);
 	name = ft_strdup(line + ft_strclen(line, '-') + 1);
 	i = 0;
+
 	while (room->next != NULL)
 	{
 		if (ft_strcmp(name, room->name) == 0)
@@ -85,21 +88,22 @@ int		**set_graph(char *line, t_room *room)
 
 	if (line == NULL)
 	{
-		if (link == NULL)
+		if (link == NULL || ft_start_chr2(link, room->nb))
 			room->error = 404;
 		// else
 		// {
 		// 	int i = 0;
 		// 	int ret = 0;
-		// 	// ft_printf("    0   1   2   3   4   5\n");
+		//
+		// 	ft_printf("    0   1   2   3   4   5\n");
 		// 	while (i < room->nb)
 		// 	{
-		// 		ret = 0;
-		// 		ft_printf("%d| ", i);
-		// 		while (ret < room->nb)
-		// 			ft_printf("[%02d]", link[i][ret++]);
+		// 		ret = -1;
+		// 		printf("%2d| ", i);
+		// 		while (++ret < room->nb)
+		// 			printf("[%2d]",link[i][ret]);
 		// 		i++;
-		// 		ft_printf("\n");
+		// 		printf("\n");
 		// 	}
 		// }
 		return (link);

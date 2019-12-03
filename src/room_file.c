@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   room_file.c                                      .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/09/14 17:53:26 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/09/21 18:48:09 by lelajour    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   room_file.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lelajour <lelajour@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/14 17:53:26 by lelajour          #+#    #+#             */
+/*   Updated: 2019/11/22 00:11:40 by lelajour         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../header/lemin.h"
 
@@ -19,13 +19,11 @@ static int	del_scotch(char *str)
 	return (1);
 }
 
-t_room *room_check(t_room *tmp, char *line)
+t_room *room_check(t_room *tmp, char *line, int *error)
 {
-	static int end;
-	static int start;
+	static int end = 0;
+	static int start = 0;
 
-	end = 0;
-	start = 0;
 	tmp->error = 0;
 	if (ft_strcmp(line, "##start") == 0)
 	{
@@ -38,7 +36,7 @@ t_room *room_check(t_room *tmp, char *line)
 		tmp->pos = 2;
 	}
 	if (end > 1 || start > 1)
-		tmp->error = 101;
+		*error = 101;
 	return (tmp);
 }
 
@@ -55,6 +53,8 @@ int		room_check_if_double(char *line, t_room *room)
 	len_room = ft_atoi(line + len);
 	str = ft_strsub(line, 0, len);
 	tmp = room;
+	if (line[0] == 'L')
+		return (del_scotch(str));
 	while (tmp->next != NULL)
 	{
 		if (ft_strcmp(str, tmp->name) == 0)
@@ -75,7 +75,7 @@ t_room	*room_struct_allocation(void)
 	room = malloc((sizeof(t_room)));
 	room->name = NULL;
 	room->nb = 0;
-	room->pos = 1;
+	room->pos = INT_MAX - 2;
 	room->len = 0;
 	room->width = 0;
 	room->ant = 0;

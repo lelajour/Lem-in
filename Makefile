@@ -6,7 +6,7 @@
 #    By: lelajour <lelajour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/10 20:37:24 by lelajour          #+#    #+#              #
-#    Updated: 2019/10/02 18:03:06 by lelajour         ###   ########.fr        #
+#    Updated: 2019/11/25 01:26:06 by lelajour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ D_LIBFT = libft/
 D_LIBFTPRINTF = libft/libftprintf/
 
 SRC1 =		lemin.c ant_file.c clear_file.c room_file.c link_file.c bfs.c\
-			path_slc_init.c utils.c\
+			path_slc_init.c utils.c utils2.c path_finder.c \
+			path_finder_utlils.c\
 
 SRC2 =		libft.a\
 

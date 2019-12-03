@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   path_slc_init.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lelajour <lelajour@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/15 17:09:02 by lelajour          #+#    #+#             */
+/*   Updated: 2019/11/25 01:43:23 by lelajour         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../header/lemin.h"
 
@@ -55,16 +66,17 @@ static void		realloc_slc_path(t_slc *slc)
 	slc->mallocsize = 20 + slc->nb_slc;
 }
 
-void	save_path(t_path *path, int pos)
+void	save_path(t_path *path, int pos, int nb)
 {
 	int tmp;
 	t_slc	*tmp2;
 
+	(void)nb;
 	tmp = 0;
-	tmp2 = path->slc == NULL ? NULL : path->slc;
-	if (pos != 0)
+	tmp2 = path->slc;
+	if (path->path[1] != path->to_do[pos])
 	{
-		while (tmp++ < pos)
+		while (path->path[1] != path->to_do[pos++])
 			path->slc = path->slc->next;
 	}
 	path->slc->nb_slc += 1;
@@ -81,21 +93,32 @@ void	save_path(t_path *path, int pos)
 	path->slc = tmp2;
 }
 
-static int		*to_do_init(int *link, t_room *room, t_path *path)
+// opti le temps de resolution + faire les combinaison
+
+static int		*to_do_init(int **link, t_room *room, t_path *path)
 {
 	int	j;
+	int	i;
 	int	tmp;
+	int	start;
 	int	*to_do;
 
-	j = 0;
+	i = 0;
 	tmp = 0;
+	start = path->start_nb <= path->end_nb ? 1 : 3;
+	path->rev = path->start_nb <= path->end_nb ? 0 : 1;
 	if (!(to_do = malloc(sizeof(int) * path->nb_path)))
 		return (NULL);
-	while (j < room->nb)
+	while (i < room->nb)
 	{
-		if (link[j] == 1)
-			to_do[tmp++] = j;
-		j++;
+		j = 0;
+		while (j < room->nb)
+		{
+			if (link[i][j] == start)
+				to_do[tmp++] = j;
+			j++;
+		}
+		i++;
 	}
 	path->end = look_for_end(room);
 	return (to_do);
@@ -103,29 +126,28 @@ static int		*to_do_init(int *link, t_room *room, t_path *path)
 
 t_path	*init_path(int **link, t_room *room)
 {
-	int		i;
 	int		nb_path;
 	t_path	*path;
 
-	i = 0;
-	if (!(path = malloc(sizeof(t_path))))
+	if (!(path = malloc(sizeof(t_path) * 1)))
 		return (NULL);
 	nb_path = 0;
 	path->nb_path = 0;
-	while (i < room->nb)
+	path->start = -1;
+	path->end = 0;
+	path->end_nb = 0;
+	path->rev = 0;
+	path->start_nb = 0;
+	if ((nb_path = ft_start_chr(link, room->nb, path)) != -1)
 	{
-		if ((nb_path = ft_start_chr(link[i], room->nb)) != -1)
-		{
-			path->nb_path = nb_path;
-			path->path = ft_imemset(ft_memalloc(room->nb), -2, room->nb);
-			path->did = ft_imemset(ft_memalloc(room->nb), -1, room->nb);
-			path->did[0] = i;
-			path->start = i;
-			path->to_do = to_do_init(link[i], room, path);
-			path->slc = NULL;
-			break ;
-		}
-		i++;
+		path->nb_path = nb_path;
+		path->path = ft_imemset(ft_memalloc(room->nb), -2, room->nb);
+		path->did = ft_imemset(ft_memalloc(room->nb), -1, room->nb);
+		path->to_do = to_do_init(link, room, path);
+		path->rend = path->start_nb <= path->end_nb ? path->end : path->start;
+		path->rstart = path->start_nb <= path->end_nb ? path->start : path->end;
+		path->slc = NULL;
+		path->zend = NULL;
 	}
 	return (path);
 }
