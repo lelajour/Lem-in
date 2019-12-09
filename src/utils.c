@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 18:34:51 by lelajour          #+#    #+#             */
-/*   Updated: 2019/11/20 16:22:59 by lelajour         ###   ########.fr       */
+/*   Updated: 2019/12/04 05:44:01 by lelajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,17 +88,13 @@ void		rev_slc(t_slc *slc)
 	int	i;
 
 	tmp = slc;
-	while (tmp != NULL)
+	if (tmp->nb_slc > 0)
 	{
-		if (tmp->nb_slc > 0)
+		i = 0;
+		while (i < tmp->nb_slc)
 		{
-			i = 0;
-			while (i < tmp->nb_slc)
-			{
-				do_rev(tmp->path[i], tmp->len_path[i]);
-				i++;
-			}
+			do_rev(tmp->path[i], tmp->len_path[i]);
+			i++;
 		}
-		tmp = tmp->next;
 	}
 }

@@ -6,39 +6,26 @@
 /*   By: lelajour <lelajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 17:09:02 by lelajour          #+#    #+#             */
-/*   Updated: 2019/11/25 01:43:23 by lelajour         ###   ########.fr       */
+/*   Updated: 2019/12/07 03:47:52 by lelajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/lemin.h"
 
-t_slc	*init_slc(int nb_path)
+t_slc	*init_slc(void)
 {
-	int		nb;
 	t_slc	*slc;
 	t_slc	*tmp;
 
-	nb = 0;
 	if (!(slc = malloc(sizeof(t_slc) * 1)))
 		return (NULL);
 	tmp = slc;
-	while (nb++ != nb_path)
-	{
-		if (!(slc->path = malloc(sizeof(int*) * 20)))
-			return (NULL);
-		slc->len_path = ft_imemset(ft_memalloc(20), 0, 20);
-		slc->nb_slc = 0;
-		slc->min = INT_MAX;
-		slc->mallocsize = 20;
-		if (nb != nb_path)
-		{
-			if (!(slc->next = malloc(sizeof(t_slc) * 1)))
-				return (NULL);
-		}
-		else
-			slc->next = NULL;
-		slc = slc->next;
-	}
+	if (!(slc->path = malloc(sizeof(int*) * 200)))
+		return (NULL);
+	slc->len_path = ft_imemset(ft_memalloc(200), 0, 200);
+	slc->nb_slc = 0;
+	slc->min = INT_MAX;
+	slc->mallocsize = 200;
 	return (tmp);
 }
 
@@ -49,9 +36,9 @@ static void		realloc_slc_path(t_slc *slc)
 	int		i;
 
 	i = 0;
-	if (!(new = malloc(sizeof(int*) * (20 + slc->nb_slc))))
+	if (!(new = malloc(sizeof(int*) * (200 + slc->nb_slc))))
 		exit(-1);
-	if (!(new_len = malloc(sizeof(int) * (20 + slc->nb_slc))))
+	if (!(new_len = malloc(sizeof(int) * (200 + slc->nb_slc))))
 		exit(-1);
 	while (i < slc->nb_slc - 1)
 	{
@@ -63,22 +50,15 @@ static void		realloc_slc_path(t_slc *slc)
 	free(slc->len_path);
 	slc->path = new;
 	slc->len_path = new_len;
-	slc->mallocsize = 20 + slc->nb_slc;
+	slc->mallocsize = 200 + slc->nb_slc;
 }
 
-void	save_path(t_path *path, int pos, int nb)
+void	save_path(t_path *path, int nb)
 {
 	int tmp;
-	t_slc	*tmp2;
 
 	(void)nb;
 	tmp = 0;
-	tmp2 = path->slc;
-	if (path->path[1] != path->to_do[pos])
-	{
-		while (path->path[1] != path->to_do[pos++])
-			path->slc = path->slc->next;
-	}
 	path->slc->nb_slc += 1;
 	tmp = path->slc->nb_slc - 1;
 	if (path->slc->nb_slc == path->slc->mallocsize)
@@ -90,10 +70,7 @@ void	save_path(t_path *path, int pos, int nb)
 	}
 	if (path->len_path < path->slc->min)
 		path->slc->min = path->len_path;
-	path->slc = tmp2;
 }
-
-// opti le temps de resolution + faire les combinaison
 
 static int		*to_do_init(int **link, t_room *room, t_path *path)
 {
@@ -147,6 +124,7 @@ t_path	*init_path(int **link, t_room *room)
 		path->rend = path->start_nb <= path->end_nb ? path->end : path->start;
 		path->rstart = path->start_nb <= path->end_nb ? path->start : path->end;
 		path->slc = NULL;
+		path->ok = INT_MAX;
 		path->zend = NULL;
 	}
 	return (path);

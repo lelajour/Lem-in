@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   lemin.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lelajour <lelajour@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/13 12:56:35 by lelajour          #+#    #+#             */
-/*   Updated: 2019/11/25 01:59:36 by lelajour         ###   ########.fr       */
-/*                                                                            */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   lemin.c                                          .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2019/09/13 12:56:35 by lelajour     #+#   ##    ##    #+#       */
+/*   Updated: 2019/11/26 15:55:03 by lelajour    ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
 /* ************************************************************************** */
-
 
 #include "../header/lemin.h"
 
@@ -22,7 +22,7 @@ static int		check_if_tube(char *line, t_room *room)
 	nb = 1;
 	tmp = room;
 	str = ft_strcdup(line, '-');
-	while (tmp->next != NULL)
+	while (tmp->next != NULL && line != NULL)
 	{
 		if (ft_strcmp(tmp->name, str) == 0)
 		{

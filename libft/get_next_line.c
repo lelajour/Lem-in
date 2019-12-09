@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   get_next_line.c                                  .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/03/19 15:34:42 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/01 07:16:02 by lelajour    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lelajour <lelajour@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/03/19 15:34:42 by lelajour          #+#    #+#             */
+/*   Updated: 2019/12/05 08:28:24 by lelajour         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../header/get_next_line.h"
 
@@ -73,7 +73,10 @@ int		get_next_line(const int fd, char **line)
 		buff[i] = '\0';
 		tmp[fd] = save_buff(buff, tmp[fd]);
 		if (i == 0 && ft_strlen(tmp[fd]) == 0)
+		{
+			free(tmp[fd]);
 			return (0);
+		}
 		if (i == 0)
 			break ;
 	}

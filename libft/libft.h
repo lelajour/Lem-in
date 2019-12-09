@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 20:40:03 by lelajour          #+#    #+#             */
-/*   Updated: 2019/11/25 07:33:36 by lelajour         ###   ########.fr       */
+/*   Updated: 2019/12/05 00:29:14 by lelajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,6 @@ void				*ft_imemset(void *s, int c, size_t n);
 char				*ft_strcdup(char *str, int c);
 int					*ft_itabdup(int *tab, int len);
 void				*ft_imemcpy(void *dest, void *src, size_t n);
+int					ft_imemcmp(const void *s1, const void *s2, size_t n);
 
 #endif

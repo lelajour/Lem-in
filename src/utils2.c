@@ -6,23 +6,11 @@
 /*   By: lelajour <lelajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 00:36:34 by lelajour          #+#    #+#             */
-/*   Updated: 2019/11/22 15:35:39 by lelajour         ###   ########.fr       */
+/*   Updated: 2019/12/04 05:45:05 by lelajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/lemin.h"
-
-int		get_total(t_slc *slc, int pos)
-{
-	t_slc*tmp;
-	int i;
-
-	i = 0;
-	tmp = slc;
-	while (i++ < pos)
-		tmp = tmp->next;
-	return (tmp->nb_slc);
-}
 
 static int		*alloc_scotch(int len)
 {
