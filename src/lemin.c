@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   lemin.c                                          .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/09/13 12:56:35 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/26 15:55:03 by lelajour    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lemin.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lelajour <lelajour@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/13 12:56:35 by lelajour          #+#    #+#             */
+/*   Updated: 2019/12/11 13:30:04 by lelajour         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../header/lemin.h"
 
@@ -125,9 +125,11 @@ int		main(void)
 	if (room->error != 0)
 		return (ft_404(ant, room, NULL));
 	path = check_if_connected(room, ant);
+	ft_printf("\n");
 	ft_printf("nombre de room = %d\n", room->nb);
 	if (path->valid_path == 0)
 		ft_404(ant, room, path);
+	fill_ant(path->zend, path->slc, room);
 	ft_404(ant, room, path);
 	return (0);
 }

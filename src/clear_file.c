@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/14 17:15:22 by lelajour          #+#    #+#             */
-/*   Updated: 2019/12/06 06:23:22 by lelajour         ###   ########.fr       */
+/*   Updated: 2019/12/12 04:54:56 by lelajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,7 @@ void	ft_clear(t_ant *ant, t_room *room)
 		if (ant->name)
 			free(ant->name);
 		if (ant->room)
-			free(ant->next_room);
-		if (ant->next_room)
-			free(ant->next->room);
+			free(ant->room);
 		tmp = ant->next;
 		free(ant);
 		ant = tmp;

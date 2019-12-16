@@ -6,13 +6,13 @@
 /*   By: lelajour <lelajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 17:09:02 by lelajour          #+#    #+#             */
-/*   Updated: 2019/12/07 03:47:52 by lelajour         ###   ########.fr       */
+/*   Updated: 2019/12/14 12:02:13 by lelajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/lemin.h"
 
-t_slc	*init_slc(void)
+t_slc	*init_slc(t_room *room)
 {
 	t_slc	*slc;
 	t_slc	*tmp;
@@ -24,6 +24,7 @@ t_slc	*init_slc(void)
 		return (NULL);
 	slc->len_path = ft_imemset(ft_memalloc(200), 0, 200);
 	slc->nb_slc = 0;
+	slc->nb_room = room->nb;
 	slc->min = INT_MAX;
 	slc->mallocsize = 200;
 	return (tmp);

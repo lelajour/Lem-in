@@ -6,7 +6,7 @@
 /*   By: lelajour <lelajour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/21 16:57:36 by lelajour          #+#    #+#             */
-/*   Updated: 2019/12/06 23:57:08 by lelajour         ###   ########.fr       */
+/*   Updated: 2019/12/14 22:31:29 by lelajour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static t_slc	*sort_slc(t_slc *slc, int *valid_path)
 {
 	t_slc	*tmp;
 	int		i;
-
+	
 	tmp = slc;
 	i = 0;
 	if (tmp->nb_slc != 0)
@@ -99,7 +99,7 @@ t_path	*check_if_connected(t_room *room, t_ant *ant)
 
 	if ((path = init_path(room->link, room)) == NULL)
 		return (NULL);
-	path->slc = init_slc();
+	path->slc = init_slc(room);
 	tmp = path->slc;
 	int y = -1;
 	ft_printf("La salle de départ est %d et la salle de fin est %d (rev : %d)\n", path->rstart, path->rend, path->rev);
@@ -118,19 +118,19 @@ t_path	*check_if_connected(t_room *room, t_ant *ant)
 		rev_slc(path->slc);
 	path_finding(path, room, ant);
 	tmp = path->slc;
-	 int i = 0;
+	// int i = 0;
 	ft_printf("Nous sommes les paths partant de start(%d) :\n", path->rstart);
-	if (tmp->nb_slc != 0)
-	{
-		while (i < tmp->nb_slc)
-		{
-			y = 0;
-			ft_printf("%d |", i);
-			while (y < tmp->len_path[i])
-				ft_printf("[%d]|", tmp->path[i][y++]);
-			ft_printf("%d\n", tmp->len_path[i]);
-			i++;
-		}
-	}
+	// if (tmp->nb_slc != 0)
+	// {
+		// while (i < tmp->nb_slc)
+		// {
+			// y = 0;
+			// ft_printf("%d |", i);
+			// while (y < tmp->len_path[i])
+				// ft_printf("[%d]|", tmp->path[i][y++]);
+			// ft_printf("%d\n", tmp->len_path[i]);
+			// i++;
+		// }
+	// }
 	return (path);
 }

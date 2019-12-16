@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   ant_file.c                                       .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: lelajour <lelajour@student.42.fr>          +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/09/14 16:02:32 by lelajour     #+#   ##    ##    #+#       */
-/*   Updated: 2019/09/20 19:34:33 by lelajour    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ant_file.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lelajour <lelajour@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/14 16:02:32 by lelajour          #+#    #+#             */
+/*   Updated: 2019/12/11 16:53:21 by lelajour         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../header/lemin.h"
 
@@ -66,7 +66,6 @@ t_ant *ant_struct_allocation(t_ant *ant, int nb_ant)
 		line = ft_itoa(len);
 		ant->name = ft_strjoin("L", line);
 		ant->room = NULL;
-		ant->next_room = NULL;
 		ant->next = NULL;
 		ant->pos = 0;
 		ant->nb_ant = nb_ant;
